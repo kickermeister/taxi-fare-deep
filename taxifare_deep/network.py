@@ -1,7 +1,7 @@
 from tensorflow.keras import layers, Sequential
 from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras import regularizers
-
+from tensorflow.keras.metrics import RootMeanSquaredError
 
 class Network:
     def __init__(self, input_dim):
@@ -22,12 +22,15 @@ class Network:
         self.model = model
 
     def compile_model(self):
-        self.model.compile(loss="mean_squared_error", optimizer="adam", metrics=["mae"])
+        rmse = RootMeanSquaredError(
+            name='rmse', dtype=None
+        )
+        self.model.compile(loss="mean_squared_error", optimizer="adam", metrics=[rmse, "mae"])
         return self.model
 
     def fit_model(self, X, y, verbose=1):
         es = EarlyStopping(
-            monitor="val_loss", patience=5, verbose=0, restore_best_weights=True
+            monitor="val_rmse", patience=5, verbose=0, restore_best_weights=True
         )
 
         history = self.model.fit(
