@@ -55,6 +55,7 @@ class Trainer:
 
         # Print & plot some key training results
         print("####### min val MAE", min(self.history.history["val_mae"]))
+        print("####### min val RMSE", min(self.history.history["val_rmse"]))
         print("####### epochs reached", len(self.history.epoch))
         if plot_history:
             plot_model_history(self.history)
