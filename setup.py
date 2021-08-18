@@ -7,7 +7,7 @@ requirements = [x.strip() for x in content if 'git+' not in x]
 
 setup(
     name='taxifare_deep',
-    version="1.0",
+    version="1.1",
     author="Bruno Lajoie",
     author_email="bruno@lewagon.org",
     description="""Packaged neural network-based predictor for the Kaggle's NY
